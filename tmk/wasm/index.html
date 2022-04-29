@@ -1,0 +1,27 @@
+<html>
+
+  <head>
+	<meta charset='UTF-8'>
+	<link rel="stylesheet" href="./styles/style.css">
+	<script src="./node_modules/@ffmpeg/ffmpeg/dist/ffmpeg.min.js"></script>
+	<script src="./scripts/tmk-hash-video.js"></script>
+	<script type="text/javascript" src="./scripts/tmk.js"></script>
+  </head>
+  <body>
+     <div class="body-container-wrapper">
+		<div class="page-center">
+			<h1>Upload Your Video files here</h1>
+
+			<a class="upload disabled" id="uploadFiles"><span>Select files</span></a>
+
+			<form id="upload" enctype="multipart/form-data">
+				<div id="drop">
+					<input type="file" name="img" id="myfile" class="upload-hidden"  accept="video/*"/>
+				</div>
+			</form>
+
+		</div>
+	</div>
+  </body>
+</html>
+  
