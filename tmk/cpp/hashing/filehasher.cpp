@@ -36,9 +36,12 @@ bool hashVideo(
   if (verbose) {
     fprintf(stderr, "%s\n", ffmpegGeneratorCommand.c_str());
   }
+#ifndef BUILD_WASM
   FILE* inputFp = popen(ffmpegGeneratorCommand.c_str(), POPEN_MODE);
-  // Note:- The below code should be uncommented and above line should be commented when generating WASM binary from c++ code .
-  //FILE* inputFp = fopen("output.rgb", "r");
+#else
+  // Note:- The below code should executed only when generating WASM binary from c++ code .
+  FILE* inputFp = fopen("output.rgb", "r");
+#endif
   if (inputFp == nullptr) {
     fprintf(stderr, "%s: ffmpeg to generate video stream failed\n", argv0);
     return false;
@@ -120,13 +123,14 @@ bool hashVideo(
 
   //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // This includes failure to exec the subordinate process.
-  // Note : Below codes should be commented when generating WASM binary from c++ code.
+  // Note : Below codes should not be commented when generating WASM binary from c++ code.
+#ifndef BUILD_WASM
   int pclose_rc = pclose(inputFp);
   if (pclose_rc != 0) {
     fprintf(stderr, "%s: ffmpeg pclose return code %d.\n", argv0, pclose_rc);
     return false;
   }
-
+#endif
   return true;
 }
 
